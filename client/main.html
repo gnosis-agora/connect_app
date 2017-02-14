@@ -1,0 +1,217 @@
+<head>
+  <title>Connect</title>
+</head>
+
+
+
+<body>
+  {{> main}}
+</body>
+
+<template name="main">
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">Connect</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About this app</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#selectSlot">Select your preference</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#submit">Enter Telegram ID</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header id="page-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="img/profile.jpeg" alt="">
+                    <div class="intro-text">
+                        <span class="name">Connect</span>
+                        <hr class="star-light">
+                        <span class="skills">Walk - Talk - Network</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About us Grid Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About us</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="success" id="selectSlot">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Select your preferences</h2>
+                    <hr class="star-light">
+                </div>
+                <div class="col-lg-12 text-center">
+                  <h4>I want to start walking at</h4>
+                  {{> timePicker}}
+                </div>
+                <div class="col-lg-12 text-center">
+                  <h4>From</h4>
+                  {{> originPicker}}
+                </div>
+                <div class="col-lg-12 text-center">
+                  <h4>To</h4>
+                  {{> destinationPicker}}
+                </div>       
+                <div class="col-lg-12 text-center page-scroll">
+                  <a href="#submit" class="btn btn-lg btn-outline">
+                    Continue
+                  </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="submit">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Telegram ID</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Telegram ID</label>
+                                <input type="text" class="form-control" placeholder="Please omit the '@' in your Telegram ID" id="telegramID">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                              <a href="https://t.me/connectAppbot">
+                                <button type="button" class="btn btn-success btn-lg btn-outline" id="connect-me-btn">Connect me</button>
+                              </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="footer-col col-lg-12 text-center">
+                        <h3>Around the Web</h3>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="http://www.facebook.com" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="http://www.instagram.com" class="btn-social btn-outline"><i class="fa fa-fw fa-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; FSociety 2017
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/freelancer.min.js"></script>
+</template>
+
+
+<template name="timePicker">
+  <div class="input-group clockpicker clockPicker-container" data-autoclose="true">
+    <input type="text" class="form-control" value="09:30" id="time-picker">
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-time"></span>
+    </span>
+  </div>
+</template>
+
+<template name="originPicker">
+  <select class = "form-control special-containers" id="origin">
+    {{#each locations}}        
+      <option value="{{originID}}">{{locationName}}</option>
+    {{/each}}
+  </select>
+</template>
+
+<template name="destinationPicker">
+  <select class = "form-control special-containers" id="destination">
+    {{#each locations}}        
+      <option value="{{destinationID}}">{{locationName}}</option>
+    {{/each}}
+  </select>
+</template>
