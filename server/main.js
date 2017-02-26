@@ -27,7 +27,7 @@ Meteor.startup(() => {
 
         for (var x = 0; x < activeUsers.length; x++) {
         	var user = activeUsers[x];
-        	if (user.telegramID != username.toLowerCase()) {
+        	if (user.telegramID != username.toLowerCase() && user.chatID != 0) {
 	        	if (currentUser.originID == user.originID && currentUser.destinationID == user.destinationID && Math.abs(currentUser.time - user.time) <= 15) {
 	        		chosenUser = user;
 	        		break;
