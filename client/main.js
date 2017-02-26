@@ -54,7 +54,7 @@ Template.main.events ({
 	"click #connect-me-btn" : function() {
 		var date_time = $("#time-picker").val().split(":");
 		Users.insert({ 
-			telegramID: $("#telegramID").val(),
+			telegramID: $("#telegramID").val().toLowerCase(),
 		 	originID: $("#origin").val(),
 		 	destinationID: $("#destination").val(),
 		 	time: parseInt(date_time[0]) * 60 + parseInt(date_time[1]),

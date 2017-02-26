@@ -15,19 +15,19 @@ Meteor.startup(() => {
 
         // update chat.id for the user
         Users.update(
-        	{telegramID : username} , 
+        	{telegramID : username.toLowerCase()} , 
         	{ $set: 
         		{
         			chatID : original.chat.id,
         		}
         	});
-        var currentUser = Users.find({ "telegramID" : username }).fetch()[0];
+        var currentUser = Users.find({ "telegramID" : username.toLowerCase() }).fetch()[0];
         var activeUsers = Users.find({}).fetch();
         var chosenUser = null;
 
         for (var x = 0; x < activeUsers.length; x++) {
         	var user = activeUsers[x];
-        	if (user.telegramID != username) {
+        	if (user.telegramID != username.toLowerCase()) {
 	        	if (currentUser.originID == user.originID && currentUser.destinationID == user.destinationID && Math.abs(currentUser.time - user.time) <= 15) {
 	        		chosenUser = user;
 	        		break;
