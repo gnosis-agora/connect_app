@@ -41,6 +41,10 @@ Meteor.startup(() => {
         	TelegramBot.send("Your buddy is going from " + chosenUser.originID + " to " + chosenUser.destinationID + " at " + Meteor.call("formatTime",chosenUser.time), original.chat.id);
         	TelegramBot.send("Great news " + chosenUser.telegramID + "! Your buddy is @" + currentUser.telegramID, chosenUser.chatID);
         	TelegramBot.send("Your buddy is going from " + currentUser.originID + " to " + currentUser.destinationID + " at " + Meteor.call("formatTime",currentUser.time), chosenUser.chatID);
+        	
+        	// Send link to app at the end of match to users
+        	TelegramBot.send("Please visit us at soon this link https://connectapp1917.herokuapp.com/  :)",original.chat.id);
+        	TelegramBot.send("Please visit us at soon this link https://connectapp1917.herokuapp.com/  :)",chosenUser.chatID);
         	Users.remove({telegramID : chosenUser.telegramID});
         	Users.remove({telegramID : currentUser.telegramID});
         }
