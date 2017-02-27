@@ -40,7 +40,7 @@ Template.destinationPicker.helpers ({
 			{destinationID : 'BIZ', locationName: 'Business School'},
 			{destinationID : 'UTown', locationName: 'University Town'},
 			{destinationID : 'YIH', locationName: 'Yusof Ishak House'},
-			{destinationID : 'PGP', locationName: "Price George's Park"},
+			{destinationID : 'PGP', locationName: "Prince George's Park"},
 			{destinationID : 'Raffles-Hall', locationName: 'Raffles Hall'},
 			{destinationID : 'Sheares-Hall', locationName: 'Sheares Hall'},
 			{destinationID : 'Eusoff-Hall', locationName: 'Eusoff Hall'},
