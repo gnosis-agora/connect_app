@@ -19,7 +19,7 @@ Template.originPicker.helpers ({
 			{originID : 'BIZ', locationName: 'Business School'},
 			{originID : 'UTown', locationName: 'University Town'},
 			{originID : 'YIH', locationName: 'Yusof Ishak House'},
-			{originID : 'PGP', locationName: "Price George's Park"},
+			{originID : 'PGP', locationName: "Prince George's Park"},
 			{originID : 'Raffles-Hall', locationName: 'Raffles Hall'},
 			{originID : 'Sheares-Hall', locationName: 'Sheares Hall'},
 			{originID : 'Eusoff-Hall', locationName: 'Eusoff Hall'},
