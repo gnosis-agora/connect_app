@@ -53,10 +53,12 @@ Template.destinationPicker.helpers ({
 Template.main.events ({
 	"click #connect-me-btn" : function() {
 		var date_time = $("#time-picker").val().split(":");
+		var telegramStr = $("#telegramID").val().toLowerCase(),
+		telegramStr = telegramStr.replace(/\s/g, '');
 		Users.upsert(
-		$("#telegramID").val().toLowerCase(),
+		telegramStr,
 		{ 
-			telegramID: $("#telegramID").val().toLowerCase(),
+			telegramID: telegramStr,
 		 	originID: $("#origin").val(),
 		 	destinationID: $("#destination").val(),
 		 	time: parseInt(date_time[0]) * 60 + parseInt(date_time[1]),
