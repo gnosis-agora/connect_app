@@ -9,13 +9,29 @@ Meteor.startup(() => {
     TelegramBot.token = "333246328:AAFds9kVxYvSJSdoSSsRXknsGQO7sPbTPp8";
     TelegramBot.start();
 
+
+    /*
+    * Test listener
+    */
+    TelegramBot.addListener('/geo', function(command, username, original) {
+        TelegramBot.send(
+            "this is a test message",
+            original.chat.id,
+            false,
+            { keyboard : [[ {text: "yes"} , {text: 'no'} ]], one_time_keyboard : true },
+            );
+        TelegramBot.setCatchAllText(true, function(username, message) {
+            TelegramBot.send("Markdown-flavored Message:\n" + message.text, message.chat.id, true);
+        });
+    });
+
     /*
     * listener that runs when user starts chatting with bot
     *
     */
     TelegramBot.addListener('/start', function(command, username, original) {
     	TelegramBot.send("Hello " + username + "!", original.chat.id);
-    	TelegramBot.send("Welcome to Connect. Please wait while we find your buddy...",original.chat.id);
+    	TelegramBot.send("Welcome to Connect. Please wait while we find your buddy...",original.chat.id,);
 
         // update chat.id for the user
         Users.update(
@@ -50,6 +66,38 @@ Meteor.startup(() => {
         	// Send link to app at the end of match to users
         	TelegramBot.send("Please visit us soon at this link https://connectapp1917.herokuapp.com/  :)",original.chat.id);
         	TelegramBot.send("Please visit us soon at this link https://connectapp1917.herokuapp.com/  :)",chosenUser.chatID);
+
+            TelegramBot.send(
+                "Would you have taken the shuttle bus or walked for this trip if not for this app?",
+                original.chat.id,
+                false,
+                { keyboard : [[ {text: "shuttle bus"} , {text: 'walked'} ]], one_time_keyboard : true },
+            );
+            TelegramBot.setCatchAllText(true, function(username, message) {
+                TelegramBot.send("Thank you for your feedback!", message.chat.id);
+                // track effectiveness of app to encourage people off the buses
+                if (message == "shuttle bus") {
+                    Datalog.upsert({userData: "effectivenessOfApp"}, {$inc: {shuttle_bus : 1}});
+                } else {
+                    Datalog.upsert({userData: "effectivenessOfApp"}, {$inc: {walked : 1}});
+                }
+            });
+
+            TelegramBot.send(
+                "Would you have taken the shuttle bus or walked for this trip if not for this app?",
+                chosenUser.chatID,
+                false,
+                { keyboard : [[ {text: "shuttle bus"} , {text: 'walked'} ]], one_time_keyboard : true },
+            );     
+            TelegramBot.setCatchAllText(true, function(username, message) {
+                TelegramBot.send("Thank you for your feedback!" , message.chat.id);
+                // track effectiveness of app to encourage people off the buses
+                if (message.text == "shuttle bus") {
+                    Datalog.upsert({userData: "effectivenessOfApp"}, {$inc: {shuttle_bus : 1}});
+                } else {
+                    Datalog.upsert({userData: "effectivenessOfApp"}, {$inc: {walked : 1}});
+                }
+            });       
         	Users.remove({telegramID : chosenUser.telegramID});
         	Users.remove({telegramID : currentUser.telegramID});
 
@@ -69,6 +117,7 @@ Meteor.startup(() => {
                 // send a notification to user to notify them of failure to match
                 TelegramBot.send("Unfortunately, we cannot find a match for you at this moment.",user.chatID);
                 TelegramBot.send("Please visit us soon at this link https://connectapp1917.herokuapp.com/",user.chatID);
+                TelegramBot.endConversation(user.telegramID, user.chatID);
                 toBeRemoved.push(user.telegramID);
             }
         };    
@@ -85,6 +134,7 @@ Meteor.startup(() => {
     TelegramBot.addListener('/leave', function(command, username, original) {    
         TelegramBot.send("We have stopped finding a match for you. Please visit us soon at this link https://connectapp1917.herokuapp.com/",original.chat.id);
         Users.remove({telegramID : username.toLowerCase()});
+        TelegramBot.endConversation(username, orginal.chat.id);
     });
 });
 
