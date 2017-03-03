@@ -519,3 +519,7 @@ fieldset[disabled] .btn-success.active {
   width: auto;
   margin: auto; 
 }
+
+.faq-font{
+  font-size: 120%;
+}
