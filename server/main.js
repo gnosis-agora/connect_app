@@ -100,7 +100,9 @@ Meteor.startup(() => {
         // convert currTime to number of minutes passed since the start of the day
         currTime = Math.floor(currTime/60);
         // need to offset 16-hours from heroku server clock
-        currTime = currTime - 16*60;
+        var hoursInUS = Math.floor(currTime/60);
+        // if (hours is between 16 and 23, deduct 16 hours from currTime), else (add 8 hours to currTime)
+        var currTime = (hoursInUS <= 23 && hoursInUS > 15) ? (currTime - 16*60) : (currTime + 8*60);
         var toBeRemoved = [];
         for (var x = 0; x < activeUsers.length; x++) {
             var user = activeUsers[x];
