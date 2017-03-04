@@ -10,20 +10,6 @@ Meteor.startup(() => {
     TelegramBot.start();
 
 
-    /*
-    * Test listener
-    */
-    TelegramBot.addListener('/geo', function(command, username, original) {
-        TelegramBot.send(
-            "this is a test message",
-            original.chat.id,
-            false,
-            { keyboard : [[ {text: "yes"} , {text: 'no'} ]], one_time_keyboard : true },
-            );
-        TelegramBot.setCatchAllText(true, function(username, message) {
-            TelegramBot.send("Markdown-flavored Message:\n" + message.text, message.chat.id, true);
-        });
-    });
 
     /*
     * listener that runs when user starts chatting with bot
@@ -90,12 +76,14 @@ Meteor.startup(() => {
                 { keyboard : [[ {text: "shuttle bus"} , {text: 'walked'} ]], one_time_keyboard : true },
             );     
             TelegramBot.setCatchAllText(true, function(username, message) {
-                TelegramBot.send("Thank you for your feedback!" , message.chat.id);
+                
                 // track effectiveness of app to encourage people off the buses
                 if (message.text == "shuttle bus") {
                     Datalog.upsert({userData: "effectivenessOfApp"}, {$inc: {shuttle_bus : 1}});
-                } else {
+                    TelegramBot.send("Thank you for your feedback!" , message.chat.id);
+                } else if (message.text == "walk") {
                     Datalog.upsert({userData: "effectivenessOfApp"}, {$inc: {walked : 1}});
+                    TelegramBot.send("Thank you for your feedback!" , message.chat.id);
                 }
             });       
         	Users.remove({telegramID : chosenUser.telegramID});
@@ -109,11 +97,13 @@ Meteor.startup(() => {
         var currDay = new Date();
         // currTime is in seconds since the start of the day
         var currTime = (currDay - new Date(currDay.getFullYear(),currDay.getMonth(),currDay.getDate()))/1000;
-        currTime = parseInt(currTime/60);
+        // convert currTime to number of minutes passed since the start of the day
+        currTime = Math.floor(currTime/60);
         var toBeRemoved = [];
         for (var x = 0; x < activeUsers.length; x++) {
             var user = activeUsers[x];
-            if ((user.time + 15) < currTime) {
+            // if the number of minutes passed in a day is 15 minutes more than user's timing
+            if (currTime > (user.time + 15)) {
                 // send a notification to user to notify them of failure to match
                 TelegramBot.send("Unfortunately, we cannot find a match for you at this moment.",user.chatID);
                 TelegramBot.send("Please visit us soon at this link https://connectapp1917.herokuapp.com/",user.chatID);
