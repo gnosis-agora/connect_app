@@ -106,7 +106,6 @@ Meteor.startup(() => {
         var toBeRemoved = [];
         for (var x = 0; x < activeUsers.length; x++) {
             var user = activeUsers[x];
-            console.log(currTime + " " + user.time);
             // if the number of minutes passed in a day is 15 minutes more than user's timing
             if (currTime > (user.time + 15)) {
                 // send a notification to user to notify them of failure to match
