@@ -99,9 +99,12 @@ Meteor.startup(() => {
         var currTime = (currDay - new Date(currDay.getFullYear(),currDay.getMonth(),currDay.getDate()))/1000;
         // convert currTime to number of minutes passed since the start of the day
         currTime = Math.floor(currTime/60);
+        // need to offset 16-hours from heroku server clock
+        currTime = currTime - 16*60;
         var toBeRemoved = [];
         for (var x = 0; x < activeUsers.length; x++) {
             var user = activeUsers[x];
+            console.log(currTime + " " + user.time);
             // if the number of minutes passed in a day is 15 minutes more than user's timing
             if (currTime > (user.time + 15)) {
                 // send a notification to user to notify them of failure to match
